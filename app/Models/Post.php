@@ -13,5 +13,9 @@ class Post extends Model
         return $this->belongsTo(Type::class);
     }
 
+    public function technologies() {
+        return $this->belongsToMany(Technology::class);
+    }
+
     protected $fillable = ['title', 'argument', 'start_date', 'end_date', 'number_of_posts', 'collaborators'];
 }

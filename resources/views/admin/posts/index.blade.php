@@ -19,6 +19,7 @@
                 <th scope="col">Data di fine</th>
                 <th scope="col">Collaboratori</th>
                 <th scope="col">Categoria</th>
+                <th scope="col">Tecnologie</th>
               </tr>
             </thead>
             <tbody>
@@ -30,7 +31,7 @@
                     <td>{{ $post->start_date }}</td>
                     <td>{{ $post->end_date }}</td>
                     <td>{{ $post->collaborators }}</td>
-                    <td><span class="badge text-bg-success">{{ $post->type->name }}</span></td>
+                    {{-- <td><span class="badge text-bg-success">{{ $post->type->name }}</span></td> --}}
                     <td>
                         <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}" class="btn btn-primary">Dettagli</a>
                         <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class="btn btn-secondary">Modifica</a>
