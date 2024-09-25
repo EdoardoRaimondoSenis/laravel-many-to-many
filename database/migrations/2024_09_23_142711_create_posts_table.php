@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('argument');
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('number_of_posts');
             $table->string('collaborators');
             $table->timestamps();
         });

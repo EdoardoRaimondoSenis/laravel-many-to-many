@@ -22,6 +22,32 @@
         <div class="alert alert-danger error">{{ $message }}</div>
     @enderror
 
+    <label class="form-label" for="type">Tipo</label>
+        <select class="form-select" aria-label="Default select example" name="type" id="type">
+            @foreach ($types as $type)
+                <option value="{{ $type->id }}">{{ $type->name }}</option>
+            @endforeach
+        </select>
+
+        <label class="form-label mt-4" for="technology">Tecnologia</label><br>
+        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+            @foreach ($technologies as $technology)
+                <input 
+                type="checkbox" 
+                class="btn-check" 
+                id="technology-{{ $technology->id }}" 
+                name="technologies[]" 
+                value="{{ $technology->id }}" 
+                autocomplete="off"
+                @if ($errors->any() && in_array($technology->id, old('technologies', [])) 
+                        || 
+                    !$errors->any() && $post->technologies->contains($technology))
+                    checked
+                @endif>
+                <label class="btn btn-outline-primary" for="btncheck{{ $technology->id }}">{{ $technology->name }}</label>
+            @endforeach
+        </div><br>
+
     <label class="form-label" for="start_date">Data di inizio</label>
     <input class="form-control" type="date" name="start_date" id="start_date" value="{{ old('start_date', $post->start_date) }}" required>
     @error('start_date')

@@ -9,7 +9,15 @@
         <h1>Dettagli Post</h1>
         <ul>
             <li>Titolo: {{ $post->title }}</li>
-            <li>Tipo: {{ $post->type ? $post->type->name : 'Nessuna Categoria'}}</li>
+            <li>Tipo: {{ $post->type ? $post->type->name : 'Nessuna Tipo'}}</li>
+            <li>Tecnologie: 
+            <ul>
+                @forelse ($post->technologies as $technology)
+                    <li class="badge text-bg-warning">{{ $technology->name }}</li>
+                @empty
+                    <li>Nessuna Tecnologia</li>
+                @endforelse
+            </ul>
             <li>Data di Inizio: {{ $post->start_date }}</li>
             <li>Data di Fine: {{ $post->end_date }}</li>
             <li>Collaboratori: {{ $post->collaborators }}</li>

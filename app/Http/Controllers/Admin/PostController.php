@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Http\Requests\PostsRequest;
 use App\Models\Type;
+use App\Models\Technology;
 
 class PostController extends Controller
 {
@@ -25,7 +26,8 @@ class PostController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.posts.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.posts.create', compact('types', 'technologies'));
     }
 
     /**
@@ -36,6 +38,11 @@ class PostController extends Controller
         $data = $request->all();
 
         $post = Post::create($data);
+
+        if (array_key_exists('technologies', $data)) {
+            $post->technologies()->attach($data['technologies']);
+        }
+
         return redirect()->route('admin.posts.show', $post);
     }
 
@@ -52,7 +59,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $technologies = Technology::all();
+        $types = Type::all();
+        return view('admin.posts.edit', compact('post', 'types', 'technologies'));
     }
 
     /**
@@ -62,6 +71,12 @@ class PostController extends Controller
     {
         $data = $request->all();
         $post->update($data);
+
+        if (array_key_exists('technologies', $data)) {
+            $post->sync($data['technologies']);
+        } else {
+            $post->technologies()->detach();
+        }
 
         return redirect()->route('admin.posts.show', $post);
     }

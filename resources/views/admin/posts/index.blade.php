@@ -31,7 +31,16 @@
                     <td>{{ $post->start_date }}</td>
                     <td>{{ $post->end_date }}</td>
                     <td>{{ $post->collaborators }}</td>
-                    {{-- <td><span class="badge text-bg-success">{{ $post->type->name }}</span></td> --}}
+                    <td>
+                        @forelse ($post->technologies as $technology)
+                        <span class="badge text-bg-warning">
+                            {{ $technology->name }}
+                        </span>
+                        @empty
+                            -
+                        @endforelse
+                    </td>
+                    <td><span class="badge text-bg-success">{{ $post->type ? $post->type->name : 'Nessun Tipo'}}</span></td>
                     <td>
                         <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}" class="btn btn-primary">Dettagli</a>
                         <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class="btn btn-secondary">Modifica</a>

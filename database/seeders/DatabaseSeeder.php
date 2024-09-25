@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             TypeTableSeeder::class,
             TechnologiesTableSeeder::class,
             PostTableSeeder::class,
+            PostTechnologyTableSeeder::class,
         ]);
     }
 }

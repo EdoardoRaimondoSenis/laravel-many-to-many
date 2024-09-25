@@ -27,8 +27,25 @@
                 <option value="{{ $type->id }}">{{ $type->name }}</option>
             @endforeach
         </select>
+
+        <label class="form-label mt-4" for="technology">Tecnologia</label><br>
+        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+            @foreach ($technologies as $technology)
+                <input 
+                type="checkbox" 
+                class="btn-check" 
+                id="technology-{{ $technology->id }}" 
+                name="technologies[]" 
+                value="{{ $technology->id }}" 
+                autocomplete="off"
+                @if (is_array('technologies', old('technologies', [])))
+                    checked
+                @endif>
+                <label class="btn btn-outline-primary" for="btncheck{{ $technology->id }}">{{ $technology->name }}</label>
+            @endforeach
+        </div><br>
     
-        <label class="form-label" for="start_date">Data di inizio</label>
+        <label class="form-label mt-3" for="start_date">Data di inizio</label>
         <input class="form-control" type="date" name="start_date" id="start_date" required>
         @error('start_date')
             <div class="alert alert-danger error">{{ $message }}</div>
